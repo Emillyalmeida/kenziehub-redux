@@ -7,4 +7,5 @@ export const ContainerMain = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
+  overflow-y: unset;
 `;

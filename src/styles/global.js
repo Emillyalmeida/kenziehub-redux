@@ -40,7 +40,7 @@ button{
 }
 label {
     color: var(--gray-white);
-    font-size: 0.85rem;
+    font-size: 1rem;
     margin-bottom: 3px;
   }
 

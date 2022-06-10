@@ -25,21 +25,28 @@ export const Content = styled.div`
   align-items: center;
   min-width: 300px;
   width: 40%;
+  max-width: 800px;
   height: auto;
   background-color: var(--gray-dark);
   border-radius: 10px;
   padding: 10px;
+  padding-bottom: 30px;
+  overflow-y: scroll;
+  margin: 20px 0;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   h2 {
     margin-top: 1rem;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
   p {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 `;
 
 export const Form = styled.form`
   width: 90%;
-  height: 80%;
+  height: auto;
 `;

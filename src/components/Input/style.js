@@ -30,7 +30,8 @@ export const InputDiv = styled.div`
       span {
         color: var(--red-pink);
         font-weight: 400;
-        font-size: 0.7rem;
+        font-size: 0.8rem;
+        padding: 5px;
       }
     `}
 `;
