@@ -11,8 +11,10 @@ const Home = () => {
       <Box>
         <h1>Kenzie Hub</h1>
         <div>
-          <Buttons onClick={() => history("/register")}>Cadastre-se</Buttons>
-          <Buttons whiteTheme onClick={() => history("/login")}>
+          <Buttons onClick={() => history.push("/register")}>
+            Cadastre-se
+          </Buttons>
+          <Buttons whiteTheme onClick={() => history.push("/login")}>
             Login
           </Buttons>
         </div>
