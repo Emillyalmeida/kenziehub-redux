@@ -7,11 +7,16 @@ const techsReducer = (state = techs, action) => {
       return listTechs;
 
     case "@techs/DELETE":
-      const { techs } = action;
-      return techs;
+      const { removedTech } = action;
+      return removedTech;
 
-    case "@techs/PACTh":
-      return;
+    case "@techs/PACTH":
+      const { updateTech } = action;
+      return updateTech;
+
+    case "@techs/SETLIST":
+      const { setList } = action;
+      return setList;
 
     default:
       return state;
