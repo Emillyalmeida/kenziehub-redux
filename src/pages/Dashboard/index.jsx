@@ -40,17 +40,18 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AddTech from "../../components/Modals/modal-create";
 
+import { PostTechThunk, getTechsThunk } from "../../store/modules/techs/thunk";
+
 const Dashboard = () => {
-  //   useEffect(() => {
-  //     getTechs();
-  //   }, []);
-
   const listTechs = useSelector(({ techs }) => techs);
-  const dataUser = useSelector(({ user }) => user.user);
+  const dataUser = useSelector(({ user }) => user);
 
-  const [users] = useState(
-    JSON.parse(localStorage.getItem("@kenzieHub:user")) || ""
-  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTechsThunk());
+  }, []);
+
   const [token] = useState(
     JSON.parse(localStorage.getItem("@kenzieHub:token")) || ""
   );
@@ -69,32 +70,8 @@ const Dashboard = () => {
 
   const logout = () => {};
 
-  const getTechs = () => {
-    api.get(`/users/${users.id}`).then((res) => {
-      //   setTech(res.data.techs);
-      localStorage.setItem("@kenzieHub:user", JSON.stringify(res.data));
-      console.log(res.data.techs);
-    });
-  };
-
   const postTech = (data) => {
-    console.log(data);
-    // api
-    //   .post("/users/techs", data, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     toast.success("A tecnologia foi cadastrada");
-    //     getTechs();
-    //     onClose();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     toast.error("Ops, já existe essa tecnologia");
-    //   });
+    dispatch(PostTechThunk(data, dataUser.token, onClose));
   };
 
   const infoTech = (id) => {
@@ -118,7 +95,7 @@ const Dashboard = () => {
       .then((res) => {
         console.log(res);
         toast.success("A tecnologia foi atualizada");
-        getTechs();
+        // getTechs();
         closeOn();
       })
       .catch((err) => {
@@ -137,7 +114,7 @@ const Dashboard = () => {
       .then((res) => {
         console.log(res);
         toast.success("A tecnologia foi excluida");
-        getTechs();
+        // getTechs();
         onDelClose();
         closeOn();
       })
@@ -156,8 +133,8 @@ const Dashboard = () => {
         <button onClick={() => logout()}>Sair</button>
       </NavBar>
       <Header>
-        <h2>Olá, {dataUser.name}</h2>
-        <p>{dataUser.course_module}</p>
+        <h2>Olá, {dataUser.user.name}</h2>
+        <p>{dataUser.user.course_module}</p>
       </Header>
       <Main>
         <div>
