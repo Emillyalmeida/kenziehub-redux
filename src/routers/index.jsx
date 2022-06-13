@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Dashboard from "../pages/Dashboard";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -18,7 +18,9 @@ const Routers = () => {
       <Route path="/login">
         {auth.user ? <Redirect to="/dashboard" /> : <Login />}
       </Route>
-      <Route path="/dashboard"></Route>
+      <Route path="/dashboard">
+        <Dashboard />
+      </Route>
     </Switch>
   );
 };
