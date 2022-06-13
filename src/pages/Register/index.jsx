@@ -11,6 +11,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../store/modules/userAuth/thunk";
+
 const Register = ({ auth }) => {
   const schema = yup.object().shape({
     name: yup
@@ -42,7 +45,11 @@ const Register = ({ auth }) => {
 
   const history = useHistory();
 
-  const postCadastro = (data) => {};
+  const dispatch = useDispatch();
+
+  const postCadastro = (data) => {
+    dispatch(registerUser(data));
+  };
 
   return (
     <Container>

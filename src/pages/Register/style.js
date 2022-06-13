@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const DivLogo = styled.div`
   display: flex;
   width: 40%;
+  max-width: 500px;
   min-width: 300px;
   height: 12%;
   justify-content: space-between;
@@ -25,7 +26,7 @@ export const Content = styled.div`
   align-items: center;
   min-width: 300px;
   width: 40%;
-  max-width: 800px;
+  max-width: 450px;
   height: auto;
   background-color: var(--gray-dark);
   border-radius: 10px;
