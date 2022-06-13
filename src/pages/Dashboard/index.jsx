@@ -38,6 +38,7 @@ import Select from "../../components/Select";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import AddTech from "../../components/Modals/modal-create";
 
 const Dashboard = () => {
   //   useEffect(() => {
@@ -77,22 +78,23 @@ const Dashboard = () => {
   };
 
   const postTech = (data) => {
-    api
-      .post("/users/techs", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        toast.success("A tecnologia foi cadastrada");
-        getTechs();
-        onClose();
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Ops, já existe essa tecnologia");
-      });
+    console.log(data);
+    // api
+    //   .post("/users/techs", data, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     toast.success("A tecnologia foi cadastrada");
+    //     getTechs();
+    //     onClose();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     toast.error("Ops, já existe essa tecnologia");
+    //   });
   };
 
   const infoTech = (id) => {
@@ -145,22 +147,7 @@ const Dashboard = () => {
       });
   };
 
-  const schema = yup.object().shape({
-    title: yup.string().required("Nome é Obrigatório"),
-    status: yup.string().required("selecione nivel"),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
   const { register: regispatch, handleSubmit: handlePatch } = useForm();
-
-  console.log(errors);
 
   return (
     <Container>
@@ -176,42 +163,7 @@ const Dashboard = () => {
         <div>
           <h3>Tecnologias</h3>
           <button onClick={onOpen}>+</button>
-          <ChakraProvider resetCSS={false}>
-            <Modal isOpen={isOpen} onClose={onClose}>
-              <ModalOverlay />
-              <ModalContent>
-                <ModalHeader>Cadastrar Tecnologia</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody pb={6} component="form">
-                  <Input
-                    register={register}
-                    name="title"
-                    label="Nome"
-                    placeholder="Digite o nome da tecnologia"
-                    error={errors.name?.message}
-                  />
-
-                  <Select
-                    placeholder="Selecione Nivel"
-                    error={errors.status?.message}
-                    register={register}
-                    name="status"
-                    label="Selecione nivel"
-                  >
-                    <option value="Iniciante">Iniciante</option>
-                    <option value="Intermediário">Intermediário</option>
-                    <option value="Avançado">Avançado</option>
-                  </Select>
-                </ModalBody>
-
-                <ModalFooter>
-                  <Buttons whiteTheme onClick={handleSubmit(postTech)}>
-                    Cadastrar tecnologia
-                  </Buttons>
-                </ModalFooter>
-              </ModalContent>
-            </Modal>
-          </ChakraProvider>
+          <AddTech isOpen={isOpen} onClose={onClose} postTech={postTech} />
         </div>
         <ListTech>
           {listTechs && listTechs.length > 0 ? (
