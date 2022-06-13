@@ -23,7 +23,10 @@ const ModalDelete = ({ isDelete, onDelClose, detailTech, onCloseInfo }) => {
     <ChakraProvider resetCSS={false}>
       <AlertDialog isOpen={isDelete} onClose={onDelClose}>
         <AlertDialogOverlay>
-          <AlertDialogContent>
+          <AlertDialogContent
+            bgColor="var(--gray-black)"
+            color="var(--gray-ligth)"
+          >
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Delete listTechs
             </AlertDialogHeader>
@@ -33,8 +36,21 @@ const ModalDelete = ({ isDelete, onDelClose, detailTech, onCloseInfo }) => {
             </AlertDialogBody>
 
             <AlertDialogFooter>
-              <Button onClick={onDelClose}>Cancel</Button>
-              <Button colorScheme="red" onClick={() => deleteTech()} ml={3}>
+              <Button
+                color="var(--pink)"
+                bgColor="var(--gray-white)"
+                border="none"
+                onClick={onDelClose}
+              >
+                Cancel
+              </Button>
+              <Button
+                bgColor="var(--red-pink)"
+                color="var(--gray-white)"
+                border="none"
+                onClick={() => deleteTech()}
+                ml={3}
+              >
                 Delete
               </Button>
             </AlertDialogFooter>

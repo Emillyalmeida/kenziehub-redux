@@ -7,6 +7,7 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Buttons from "../Buttons";
@@ -29,9 +30,15 @@ const ModalInfo = ({ detailTech, isInfo, onCloseInfo, pacthTech }) => {
     <ChakraProvider resetCSS={false}>
       <Modal isOpen={isInfo} onClose={onCloseInfo}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Tecnologia Detalhes</ModalHeader>
-          <ModalCloseButton />
+        <ModalContent bgColor="var(--gray-black)">
+          <ModalHeader bgColor="var(--gray-medium)" as="h3">
+            Tecnologia Detalhes
+          </ModalHeader>
+          <ModalCloseButton
+            bgColor="var(--gray-black)"
+            color="var(--gray-ligth)"
+            borderColor="var(--gray-medium)"
+          />
           <ModalBody pb={6} component="form">
             <Input
               register={regispatch}
@@ -60,9 +67,18 @@ const ModalInfo = ({ detailTech, isInfo, onCloseInfo, pacthTech }) => {
             <Buttons whiteTheme onClick={handlePatch(pacthTech)}>
               Salvar alterações
             </Buttons>
-            <button className="excluir" onClick={onDelOpen}>
+            <Button
+              h="48px"
+              ml="4"
+              w="100px"
+              mt="1rem"
+              color="var(--pink)"
+              bgColor="var(--gray-white)"
+              border="none"
+              onClick={onDelOpen}
+            >
               Excluir
-            </button>
+            </Button>
             <ModalDelete
               onDelClose={onDelClose}
               isDelete={isDelete}
