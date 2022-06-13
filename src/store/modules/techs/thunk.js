@@ -37,3 +37,52 @@ export const getTechsThunk = () => (dispatch, getState) => {
       console.log(err);
     });
 };
+
+export const patchTechsThunk =
+  (data, id, token, onClose) => (dispatch, getState) => {
+    const { techs } = getState();
+
+    api
+      .put(`/users/techs/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const findTech = techs.find((tech) => tech.id === id);
+        findTech.status = data.status;
+        dispatch(patchTechs([...techs]));
+        toast.success("A tecnologia foi atualizada");
+        onClose();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Ops, Houve um erro");
+      });
+  };
+
+export const deleteTechsThunk =
+  (id, onCloseInfo, onDelClose) => (dispatch, getState) => {
+    const { techs } = getState();
+    const { user } = getState();
+    api
+      .delete(`/users/techs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        const list = techs.filter((tech) => tech.id !== id);
+        dispatch(deleteTechs(list));
+        toast.success("A tecnologia foi excluida");
+
+        onDelClose();
+        onCloseInfo();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Ops, não foi possivel excluir");
+      });
+  };
