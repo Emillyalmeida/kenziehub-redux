@@ -10,7 +10,8 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { Redirect } from "react-router-dom";
+import { LoginThunk } from "../../store/modules/userAuth/thunk";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const schema = yup.object().shape({
@@ -30,13 +31,11 @@ const Login = () => {
 
   const history = useHistory();
 
-  const navgation = (path) => {
-    return history.push(path);
+  const dispatch = useDispatch();
+
+  const postLogin = async (data) => {
+    dispatch(LoginThunk(data));
   };
-
-  console.log(errors);
-
-  const postLogin = (data) => {};
 
   return (
     <Container>
@@ -67,7 +66,7 @@ const Login = () => {
         </Form>
         <DivNotcount>
           <p>Ainda não possui conta?</p>
-          <Buttons type="button" onClick={() => navgation("/register")}>
+          <Buttons type="button" onClick={() => history.push("/register")}>
             Casdastre-se
           </Buttons>
         </DivNotcount>

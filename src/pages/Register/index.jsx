@@ -14,7 +14,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 
-const Register = ({ auth }) => {
+const Register = () => {
   const schema = yup.object().shape({
     name: yup.string().required("Nome Obrigatório"),
     email: yup.string().required("Email Obrigatório").email("Email invalido"),
