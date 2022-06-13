@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const NavBar = styled.nav`
   width: 100%;
+  max-width: 1000px;
   height: 10%;
   display: flex;
   align-items: center;
@@ -29,6 +30,7 @@ export const Header = styled.header`
   height: 15%;
   padding: 10px;
   width: 100%;
+  max-width: 1000px;
   background-color: var(--gray-black);
   @media (min-width: 1024px) {
     width: 80%;
@@ -53,6 +55,7 @@ export const Main = styled.main`
   flex-direction: column;
   padding: 10px;
   justify-content: space-between;
+  max-width: 1000px;
   @media (min-width: 1024px) {
     width: 80%;
   }
@@ -80,6 +83,10 @@ export const ListTech = styled.ul`
   height: 88%;
   overflow-y: scroll;
   padding: 10px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   > h3 {
     text-align: center;
     margin-top: 1rem;

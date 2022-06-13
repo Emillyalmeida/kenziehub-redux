@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import Container from "../../components/Container";
 import Logo from "../../components/Logo";
@@ -9,11 +8,9 @@ import { NavBar, Header, Main, ListTech } from "./style";
 
 import { useDisclosure } from "@chakra-ui/react";
 
-import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import AddTech from "../../components/Modals/modal-create";
-
 import ModalInfo from "../../components/Modals/modal-info";
 
 import {
@@ -40,8 +37,6 @@ const Dashboard = () => {
     onOpen: onOpenInfo,
     onClose: onCloseInfo,
   } = useDisclosure();
-
-  const history = useHistory();
 
   const logout = () => {};
 

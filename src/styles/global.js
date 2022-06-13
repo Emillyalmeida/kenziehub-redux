@@ -21,11 +21,16 @@ export default createGlobalStyle`
     --red-pink:#E83F5B;
     --green: #3FE864
 }
+
+html {
+    overflow-y: scroll;
+}
 body{
     background-color: var(--gray-black);
     font-family: 'Inter', serif;
     height: 100vh;
     width: 100vw;
+   
 }
 
 h1,h2,h3,h4{
@@ -44,5 +49,7 @@ label {
     margin-bottom: 3px;
   }
 
-
+  ::-webkit-scrollbar {
+display: none;
+}
 `;
