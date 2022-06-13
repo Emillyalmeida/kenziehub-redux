@@ -1,9 +1,9 @@
 import Container from "../../components/Container";
 import Logo from "../../components/Logo";
-import { Content, DivLogo, Form } from "./style";
 import Input from "../../components/Input";
 import Buttons from "../../components/Buttons";
 import Select from "../../components/Select";
+import { Content, DivLogo, Form } from "./style";
 
 import { useHistory } from "react-router-dom";
 
@@ -11,18 +11,12 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../store/modules/userAuth/thunk";
+import api from "../../services/api";
+import { toast } from "react-toastify";
 
 const Register = ({ auth }) => {
   const schema = yup.object().shape({
-    name: yup
-      .string()
-      .required("Nome Obrigatório")
-      .matches(
-        /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/,
-        " não deve conter numeros"
-      ),
+    name: yup.string().required("Nome Obrigatório"),
     email: yup.string().required("Email Obrigatório").email("Email invalido"),
     password: yup
       .string()
@@ -45,10 +39,23 @@ const Register = ({ auth }) => {
 
   const history = useHistory();
 
-  const dispatch = useDispatch();
+  const postCadastro = ({ name, email, password, course_module }) => {
+    const user = { name, email, password, course_module };
+    user.contact = "none";
+    user.bio = "Lorem ipsum dolor emet";
 
-  const postCadastro = (data) => {
-    dispatch(registerUser(data));
+    console.log(user);
+    api
+      .post("/users", user)
+      .then((res) => {
+        console.log(res);
+        toast.success("Conta criada com sucesso ");
+        return history.push("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Ops! E-mail já cadastrado");
+      });
   };
 
   return (
@@ -112,11 +119,6 @@ const Register = ({ auth }) => {
               Quarto módulo
             </option>
           </Select>
-
-          {/* {!!errors.course_module?.message && (
-            <span>{errors.course_module?.message}</span>
-          )} */}
-
           <Buttons whiteTheme type="submit">
             Casdastrar
           </Buttons>
