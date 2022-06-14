@@ -6,7 +6,6 @@ export const LoginThunk = (data) => (dispatch) => {
   api
     .post("/sessions", data)
     .then((res) => {
-      console.log(res);
       toast.success("Você está logado");
       localStorage.setItem("@KenzieHub/User", JSON.stringify(res.data));
       dispatch(LoginUser(res.data));
@@ -19,6 +18,5 @@ export const LoginThunk = (data) => (dispatch) => {
 
 export const LogoutThunk = () => (dispatch) => {
   localStorage.removeItem("@KenzieHub/User");
-  console.log("entrou");
   dispatch(LogoutUser({}));
 };

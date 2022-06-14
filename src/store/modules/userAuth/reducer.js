@@ -8,7 +8,6 @@ const userAuthReducer = (state = user, action) => {
 
     case "@User/LogOut":
       const { vazio } = action;
-      console.log(vazio);
       return vazio;
 
     default:

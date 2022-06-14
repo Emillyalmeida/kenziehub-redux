@@ -30,7 +30,6 @@ export const getTechsThunk = () => (dispatch, getState) => {
   api
     .get(`/users/${user.user.id}`)
     .then((res) => {
-      console.log(res);
       localStorage.setItem("@KenzieHub/techs", JSON.stringify(res.data));
       dispatch(setTechs(res.data.techs));
     })
@@ -50,7 +49,6 @@ export const patchTechsThunk =
         },
       })
       .then((res) => {
-        console.log(res);
         const findTech = techs.find((tech) => tech.id === id);
         findTech.status = data.status;
         localStorage.setItem("@KenzieHub/techs", JSON.stringify([...techs]));
@@ -75,7 +73,6 @@ export const deleteTechsThunk =
         },
       })
       .then((res) => {
-        console.log(res);
         const list = techs.filter((tech) => tech.id !== id);
         localStorage.setItem("@KenzieHub/techs", JSON.stringify(list));
         dispatch(deleteTechs(list));
