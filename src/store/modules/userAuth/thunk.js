@@ -1,7 +1,6 @@
 import api from "../../../services/api";
 import { toast } from "react-toastify";
 import { LogoutUser, LoginUser } from "./actions";
-// import { useHistory } from "react-router-dom";
 
 export const LoginThunk = (data) => (dispatch) => {
   api
@@ -16,4 +15,10 @@ export const LoginThunk = (data) => (dispatch) => {
       console.log(err);
       toast.error("Erro! Verifique email e senha");
     });
+};
+
+export const LogoutThunk = () => (dispatch) => {
+  localStorage.removeItem("@KenzieHub/User");
+  console.log("entrou");
+  dispatch(LogoutUser({}));
 };
