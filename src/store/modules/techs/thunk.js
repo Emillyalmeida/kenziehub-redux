@@ -14,6 +14,7 @@ export const PostTechThunk = (data, token, onClose) => (dispatch, getState) => {
     .then((res) => {
       console.log(res);
       const list = [...techs, res.data];
+      localStorage.setItem("@KenzieHub/techs", JSON.stringify(list));
       dispatch(addTechs(list));
       toast.success("A tecnologia foi cadastrada");
       onClose();
@@ -52,6 +53,7 @@ export const patchTechsThunk =
         console.log(res);
         const findTech = techs.find((tech) => tech.id === id);
         findTech.status = data.status;
+        localStorage.setItem("@KenzieHub/techs", JSON.stringify([...techs]));
         dispatch(patchTechs([...techs]));
         toast.success("A tecnologia foi atualizada");
         onClose();
@@ -75,6 +77,7 @@ export const deleteTechsThunk =
       .then((res) => {
         console.log(res);
         const list = techs.filter((tech) => tech.id !== id);
+        localStorage.setItem("@KenzieHub/techs", JSON.stringify(list));
         dispatch(deleteTechs(list));
         toast.success("A tecnologia foi excluida");
 

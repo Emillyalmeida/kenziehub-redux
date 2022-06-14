@@ -19,15 +19,23 @@ import {
   patchTechsThunk,
 } from "../../store/modules/techs/thunk";
 
+import { LogoutThunk } from "../../store/modules/userAuth/thunk";
+import { Redirect, useHistory } from "react-router-dom";
+
 const Dashboard = () => {
   const listTechs = useSelector(({ techs }) => techs);
   const dataUser = useSelector(({ user }) => user);
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   useEffect(() => {
+    if (!dataUser.token) {
+      return history.push("/login");
+    }
     dispatch(getTechsThunk());
-  }, []);
+  }, [dataUser.token]);
 
   const [detailTech, setdetail] = useState({});
 
@@ -38,7 +46,10 @@ const Dashboard = () => {
     onClose: onCloseInfo,
   } = useDisclosure();
 
-  const logout = () => {};
+  const logout = () => {
+    dispatch(LogoutThunk());
+    return <Redirect to="/login" />;
+  };
 
   const postTech = (data) => {
     dispatch(PostTechThunk(data, dataUser.token, onClose));
@@ -46,7 +57,6 @@ const Dashboard = () => {
 
   const infoTech = (id) => {
     const info = listTechs.find((tec) => tec.id === id);
-    console.log(info);
     setdetail(info);
     onOpenInfo();
   };
@@ -58,6 +68,10 @@ const Dashboard = () => {
       patchTechsThunk(pacth, detailTech.id, dataUser.token, onCloseInfo)
     );
   };
+
+  if (!dataUser.token) {
+    return history.push("/login");
+  }
 
   return (
     <Container>

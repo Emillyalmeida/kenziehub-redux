@@ -10,16 +10,16 @@ const Routers = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Home />
+        {auth.user ? <Redirect to="/dashboard" /> : <Home />}
       </Route>
       <Route path="/register">
-        <Register />
+        {auth.user ? <Redirect to="/dashboard" /> : <Register />}
       </Route>
       <Route path="/login">
         {auth.user ? <Redirect to="/dashboard" /> : <Login />}
       </Route>
       <Route path="/dashboard">
-        <Dashboard />
+        {!auth.user ? <Redirect to="/login" /> : <Dashboard />}
       </Route>
     </Switch>
   );
