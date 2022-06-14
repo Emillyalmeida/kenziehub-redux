@@ -20,6 +20,12 @@ export default createGlobalStyle`
     --gray-white:#F8F9FA;
     --red-pink:#E83F5B;
     --green: #3FE864
+
+    --toastify-color-light : var(--gray-dark);
+    --toastify-text-color-light: var(--gray-white);
+    --toastify-toast-background :var(--gray-dark);
+    --toastify-icon-color-success : var( --green ) ; 
+    --toastify-icon-color-error : var(--red-pink) ;
 }
 
 html {
@@ -51,5 +57,10 @@ label {
 
   ::-webkit-scrollbar {
 display: none;
+}
+
+
+.Toastify__toast-theme--light { 
+      background-color: var(--gray-medium);
 }
 `;
