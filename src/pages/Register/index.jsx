@@ -44,11 +44,9 @@ const Register = () => {
     user.contact = "none";
     user.bio = "Lorem ipsum dolor emet";
 
-    console.log(user);
     api
       .post("/users", user)
       .then((res) => {
-        console.log(res);
         toast.success("Conta criada com sucesso ");
         return history.push("/login");
       })
