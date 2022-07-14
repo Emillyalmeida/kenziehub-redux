@@ -15,21 +15,26 @@ const apiMock = new MockAdapter(api);
 
 const store = mockStore({});
 
-const functionLogin = (a) => (dispatch) => {
-  dispatch({ type: "@User/LogIn", payload: a });
+const functionLogin = (a) => {
+  return { type: "@User/LogIn", payload: a };
 };
+
+function fetchData() {
+  return (dispatch) => {
+    return apiMock.onPost("/sessions").reply(200, dispatch(functionLogin("a")));
+  };
+}
 
 const expectedActions = { type: "@User/LogIn", payload: "a" };
 
 describe("Login page", () => {
   test("To able to signIn", async () => {
-    apiMock.onPost("/sessions").replyOnce(200, {});
     render(
       <Provider store={store}>
         <Login />
       </Provider>
     );
-    store.dispatch(functionLogin("a"));
+    store.dispatch(fetchData());
 
     const fieldEmail = screen.getByPlaceholderText("Digite aqui seu email");
     const fieldPassword = screen.getByPlaceholderText("Digite aqui sua senha");
