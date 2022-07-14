@@ -16,4 +16,18 @@ describe("Component Inputs", () => {
 
     expect(screen.getByPlaceholderText("Digite aqui seu email")).toBeTruthy();
   });
+
+  test("verify error message", () => {
+    render(
+      <Input
+        label="E-mail"
+        error="email invalido"
+        name="Email"
+        placeholder="Digite aqui seu email"
+        register={() => {}}
+      />
+    );
+
+    expect(screen.getByText("email invalido")).toBeInTheDocument();
+  });
 });
