@@ -51,4 +51,29 @@ describe("Login page", () => {
     expect(fieldPassword).toHaveValue("123456789");
     expect(store.getActions()).toContainEqual(expectedActions);
   });
+
+  test("To able not to signIn, credentials invalid", async () => {
+    render(
+      <Provider store={store}>
+        <Login />
+      </Provider>
+    );
+
+    const fieldEmail = screen.getByPlaceholderText("Digite aqui seu email");
+    const fieldPassword = screen.getByPlaceholderText("Digite aqui sua senha");
+
+    const button = screen.getByText("Entrar");
+
+    await act(() => {
+      fireEvent.change(fieldEmail, { target: { value: "johndoe" } });
+      fireEvent.change(fieldPassword, { target: { value: "1234" } });
+      fireEvent.click(button);
+    });
+
+    expect(fieldEmail).toHaveValue("johndoe");
+    expect(fieldPassword).toHaveValue("1234");
+
+    expect(screen.getByText("Email invalido")).toBeInTheDocument();
+    expect(screen.getByText("Tamanho minimo 8 caracters")).toBeInTheDocument();
+  });
 });

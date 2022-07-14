@@ -16,8 +16,8 @@ jest.mock("react-router-dom", () => ({
   }),
 }));
 
-describe("Login page", () => {
-  test("To able to signIn", async () => {
+describe("Register Page", () => {
+  test("To able to signUp", async () => {
     apiMock.onPost("/users").replyOnce(200, {});
     render(<Register />);
     const emailField = screen.getByPlaceholderText("Digite aqui seu email");
@@ -53,5 +53,39 @@ describe("Login page", () => {
       "Primeiro módulo (Introdução ao Frontend)"
     );
     expect(mockHistory).toHaveBeenCalledWith("/login");
+  });
+
+  test("To not able to signUp, cretentials invalid", async () => {
+    apiMock.onPost("/users").replyOnce(401, {});
+    render(<Register />);
+    const emailField = screen.getByPlaceholderText("Digite aqui seu email");
+    const passwordField = screen.getByPlaceholderText("Digite aqui sua senha");
+    const confirmPasswordField = screen.getByPlaceholderText(
+      "Digite novamente sua senha"
+    );
+
+    const buttonElement = screen.getByText("Casdastrar");
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      fireEvent.change(emailField, { target: { value: "johndoe" } });
+      fireEvent.change(passwordField, { target: { value: "123456" } });
+      fireEvent.change(confirmPasswordField, {
+        target: { value: "" },
+      });
+
+      fireEvent.click(buttonElement);
+    });
+
+    expect(emailField).toHaveValue("johndoe");
+    expect(passwordField).toHaveValue("123456");
+    expect(confirmPasswordField).toHaveValue("");
+
+    expect(screen.getByText("Email invalido")).toBeInTheDocument();
+    expect(screen.getByText("Tamanho minimo 8 caracters")).toBeInTheDocument();
+    expect(
+      screen.getByText("Confimação de senha obrigatoria")
+    ).toBeInTheDocument();
+    expect(mockHistory).not.toHaveBeenCalledWith("/login");
   });
 });

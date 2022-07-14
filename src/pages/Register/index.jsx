@@ -24,7 +24,7 @@ const Register = () => {
       .min(8, "Tamanho minimo 8 caracters"),
     confirmPassword: yup
       .string()
-      .required("Confimação de email obrigatoria")
+      .required("Confimação de senha obrigatoria")
       .oneOf([yup.ref("password")], "As senhas não são iguais"),
 
     course_module: yup.string().required("Selecione um modulo"),
