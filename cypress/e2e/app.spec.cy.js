@@ -84,6 +84,11 @@ describe("Test KenzieHub", () => {
     cy.get("button[type=submit]").click();
 
     dispatch(LoginUser(user));
+
+    cy.intercept("GET", "/users/4ccdd8a0-f02b-46ad-a275-384ca74b1457", {
+      statusCode: 200,
+      body: [tech],
+    });
     cy.contains("Tecnologias");
   });
 
@@ -150,7 +155,6 @@ describe("Test KenzieHub", () => {
 
     cy.get("footer button:last").click();
 
-    tech.status = "Iniciante";
     cy.intercept("DELETE", "/users/techs/ad85c1e7-9989-46e1-bc5b-49a24e7cb78", {
       statusCode: 200,
     }).as("Techs");
@@ -162,5 +166,20 @@ describe("Test KenzieHub", () => {
     dispatch(deleteTechs([]));
 
     cy.get("ul > h3").contains("Nenhuma tecnologia cadastrada");
+  });
+
+  it("able to logout", () => {
+    cy.viewport(1440, 900);
+    cy.intercept("GET", "/users/4ccdd8a0-f02b-46ad-a275-384ca74b1457", {
+      statusCode: 200,
+      body: [tech],
+    });
+    cy.wait(4000); //o tostify aparece na frente do botão impedindo o click por isso espera de 4s
+
+    cy.get("nav button").contains("Sair").click();
+
+    dispatch(LogoutUser({}));
+
+    cy.contains("Login");
   });
 });
