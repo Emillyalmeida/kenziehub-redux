@@ -8,6 +8,8 @@ Esse projeto foi desenvolvido com ReactJs, e a ideia foi proposta pela Kenzie Ac
 
 Nessa aplicação é possivel fazer o Login e cadastro do usuario, depois de logado, será direcionado a dashboard e poderá adicionar as tecnologias já estudadas e o seu nível e mostrará na tela a lista de techs cadastradas. Também pode-se mudar o nivel das tecnologias de acordo com seu avanço nela e deletar caso deseje.
 
+Foram foram realizados para essa aplicação testes unitários para os components e testes de integrações para as features usando **testing-library**, além de teste E2E com Cypress.
+
 ## Bibliotecas
 
 - **Redux**
@@ -18,6 +20,11 @@ Nessa aplicação é possivel fazer o Login e cadastro do usuario, depois de log
 - React Hook Form
 - React Router Dom
 - React toastify
+
+## Testes
+
+- Testing-library
+- Cypress
 
 ### Link da app
 
