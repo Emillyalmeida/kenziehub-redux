@@ -11,7 +11,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { LoginThunk } from "../../store/modules/userAuth/thunk";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Login = () => {
   const schema = yup.object().shape({

@@ -62,5 +62,9 @@ display: none;
 
 .Toastify__toast-theme--light { 
       background-color: var(--gray-medium);
+      svg {
+        fill: var(--green)
+      }
 }
+
 `;

@@ -35,7 +35,7 @@ const Dashboard = () => {
       return history.push("/login");
     }
     dispatch(getTechsThunk());
-  }, [dataUser.token]);
+  }, [dataUser.token, listTechs]);
 
   const [detailTech, setdetail] = useState({});
 
